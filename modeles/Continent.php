@@ -132,6 +132,28 @@ class Continent
     }
 
 
+
+
+    /**
+     * Set the value of num
+     */
+    public function setNum($num): self
+    {
+        $this->num = $num;
+
+        return $this;
+    }
+
+
+    /**
+     * Set the value of num
+     */
+    public function setNum($num): self
+    {
+        $this->num = $num;
+
+        return $this;
+    }
 }
 
 

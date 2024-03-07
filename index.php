@@ -11,7 +11,7 @@ switch($uc){
         break;
 
     case 'continents':
-        include('controllers/continentController.php');
+        include('controllers/ContinentController.php');
         break;
 }
 

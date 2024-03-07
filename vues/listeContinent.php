@@ -1,7 +1,7 @@
 <div class="container mt-5">
         <div class="row pt-3"> 
             <div class="col-9"><h2>Liste des Continent</h2></div>
-            <div class="col-3"><a href='formContinent.php?action=Ajouter' class='btn btn-success'><i class='fa-solid fa-plus'></i>Crée un continent <a></div>
+            <div class="col-3"><a href='index.php?uc=continents&action=add' class='btn btn-success'><i class='fa-solid fa-plus'></i>Crée un continent <a></div>
 
 
             </div>
@@ -16,9 +16,8 @@
             <tbody>
                 <?php foreach ($LesContinents as $continent) {
                     echo "<tr class='d-flex'>";
-                    echo "<td class='col-md-2'>$continent->getNum() </td>";
-                    echo "<td class='col-md-5'>$continent->getLibelle()</td>";
-                    echo "<td class='col-md-3'>$nationalite->libCont</td>";
+                    echo "<td class='col-md-3'>".$continent->getNum().  "</td>";
+                    echo "<td class='col-md-6'>" .$continent->getLibelle(). "</td>";
                     echo "<td class='col-md-3'>
                     <a href='formNat.php?action=Modifier&num=".$continent->getNum()."' class='btn btn-primary'><i class='fa-solid fa-pen'></i>Modifier la nationalité <a>
                     <a href='#supprNat' data-toggle='modal' data-msg='Voulez vous vraiment supprimer cette nationalité ?' data-suppr='supprNat.php?num=" .$continent->getNum()."' class='btn btn-danger'><i class='fa-solid fa-trash'></i>Supprimer la nationalité <a>
