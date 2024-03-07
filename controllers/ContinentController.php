@@ -25,7 +25,7 @@ switch($action){
             $nb=Continent::add($continent);
             $message = "modifié";
         }else { //cas modif
-            $continent->setNum($_POST['num']);
+            //$continent->setNum($_POST['num']);
             $continent->setLibelle($_POST['libelle']);
         }
         if($nb==1){
