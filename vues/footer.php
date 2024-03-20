@@ -43,3 +43,4 @@ $("a[data-suppr]" ).click(function(){
 </script>
 </body>
 </html>
+<?php ob_end_flush(); ?>

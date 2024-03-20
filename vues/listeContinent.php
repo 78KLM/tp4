@@ -19,8 +19,8 @@
                     echo "<td class='col-md-3'>".$continent->getNum().  "</td>";
                     echo "<td class='col-md-6'>" .$continent->getLibelle(). "</td>";
                     echo "<td class='col-md-3'>
-                    <a href='formNat.php?action=Modifier&num=".$continent->getNum()."' class='btn btn-primary'><i class='fa-solid fa-pen'></i>Modifier la nationalité <a>
-                    <a href='#supprNat' data-toggle='modal' data-msg='Voulez vous vraiment supprimer cette nationalité ?' data-suppr='supprNat.php?num=" .$continent->getNum()."' class='btn btn-danger'><i class='fa-solid fa-trash'></i>Supprimer la nationalité <a>
+                    <a href='index.php?uc=continents&action=update&num=".$continent->getNum()."' class='btn btn-primary'><i class='fa-solid fa-pen'></i>Modifier la nationalité <a>
+                    <a href='#supprNat' data-toggle='modal' data-msg='Voulez vous vraiment supprimer cette nationalité ?' data-suppr='index.php?uc=continents&action=delete&num=" .$continent->getNum()."' class='btn btn-danger'><i class='fa-solid fa-trash'></i>Supprimer la nationalité <a>
                     </td>";
                     echo "</tr>" ;
                 ///supprNat.php?num=$nationalite->num
