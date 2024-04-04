@@ -146,7 +146,8 @@ class Nationalite
     public static function update(Nationalite $nationalite) :int 
     {
         $req=MonPdo::getInstance()->prepare("update nationalite set libelle= :libelle, numContinent= :numContinent where num= :id");
-        $req->bindParam(':id',$nationalite->getNum());
+        $num=$nationalite->getNum();
+        $req->bindParam(':id',$num);
         $req->bindParam(':libelle',$nationalite->getlibelle());
         $req->bindParam(':numContinent',$nationalite->getNumContinent());
         $nb=$req->execute();
@@ -162,12 +163,24 @@ class Nationalite
     public static function delete(Nationalite $nationalite) :int 
     {
         $req=MonPdo::getInstance()->prepare("delete from nationalite where num= :id");
-        $req->bindParam(':id',$nationalite->getNum());
+        $num=$nationalite->getNum();
+        $req->bindParam(':id',$num);
         $nb=$req->execute();
         return $nb;
     }
 
 
+
+
+    /**
+     * Set the value of num
+     */
+    public function setNum($num): self
+    {
+        $this->num = $num;
+
+        return $this;
+    }
 }
 
 

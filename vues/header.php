@@ -53,7 +53,7 @@
   <body>
     
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-  <a class="navbar-brand" href="menu.php">Ma bibliothèque</a>
+  <a class="navbar-brand" href="index.php">Ma bibliothèque</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -63,23 +63,24 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-book"></i>Gestion des genres</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="listeDesGenres.php">Listes des genres</a>
-          <a class="dropdown-item" href="formGenre.php?action=Ajouter">Ajouter un genre</a>
+          <a class="dropdown-item" href="index.php?uc=genre&action=list">Listes des genres</a>
+          <a class="dropdown-item" href="index.php?uc=genre&action=add
+          ">Ajouter un genre</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-person"></i> Gestion des Auteurs</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Listes des Auteurs</a>
-          <a class="dropdown-item" href="#">Ajouter un Auteurs</a>
-          <a class="dropdown-item" href="#">Rechercher un Auteurs</a>
+          <a class="dropdown-item" href="index.php?uc=auteur&action=list">Listes des Auteurs</a>
+          <a class="dropdown-item" href="index.php?uc=auteur&action=add">Ajouter un Auteurs</a>
+          <a class="dropdown-item" href="index.php?uc=auteur&action=search">Rechercher un Auteurs</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-flag"></i> Gestion des nationalité</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="ListeNationalites.php">Listes des nationalité</a>
-          <a class="dropdown-item" href="formNat.php?action=Ajouter">Ajouter une nationalité</a>
+          <a class="dropdown-item" href="index.php?uc=nationalite&action=list">Listes des nationalité</a>
+          <a class="dropdown-item" href="index.php?uc=nationalite&action=add">Ajouter une nationalité</a>
         </div>
       </li>
       <li class="nav-item dropdown">
