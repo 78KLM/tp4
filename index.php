@@ -3,6 +3,8 @@
 include "vues/header.php";
 include "modeles/Continent.php";
 include "modeles/Nationalite.php";
+include "modeles/Genre.php";
+include "modeles/Auteur.php";
 include "modeles/monPdo.php";
 include "vues/messageFlash.php";
 
@@ -18,7 +20,18 @@ switch($uc){
         break;
     
     case 'nationalite':
-        include('controllers/nationaliteController.php');
+        include('controllers/NationaliteController.php');
+        break;
+    
+    case 'genre':
+       include('controllers/GenreController.php');
+       break;
+       
+    case 'auteur':
+        include('controllers/AuteurController.php');
+        break;
+    case 'livre':
+        include('controllers/LivreController.php');
         break;
 }
 

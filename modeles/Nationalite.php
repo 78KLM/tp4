@@ -95,9 +95,20 @@ class Nationalite
      *
      * @return Nationalite[] tableau d'objet Nationalite
      */
-    public static function findAll() :array
+    public static function findALL(?string $libelle="", ?string $continentSel="Tous") :array
     {
-        $req=MonPdo::getInstance()->prepare("select nationalite.num, nationalite.libelle as 'libNat', continent.libelle as 'libCont' from nationalite, continent where nationalite.numContinent=continent.num");
+        $texteReq="select n.num as numero, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num";
+        if($libelle !="")
+        {
+            $texteReq.=" and n.libelle like '%" .$libelle. "%'";
+        }
+
+        if($continentSel !="Tous")
+        {
+            $texteReq.=" and c.num = " .$continentSel;
+        }
+        $texteReq.=" order by n.libelle";
+        $req=MonPdo::getInstance()->prepare($texteReq);
         $req->setFetchMode(PDO::FETCH_OBJ);
         $req->execute();
         $lesResultats=$req->fetchALL();
@@ -130,9 +141,10 @@ class Nationalite
      */
     public static function add(Nationalite $nationalite) :int 
     {
+        $numContinent = $nationalite->getNumContinent()->getNum(); // Récupérer l'ID du continent
         $req=MonPdo::getInstance()->prepare("insert into nationalite(libelle,numContinent) values(:libelle, :numContinent)");
         $req->bindParam(':libelle',$nationalite->getLibelle());
-        $req->bindParam(':numContinent',$nationalite->getNumContinent());
+        $req->bindParam(':numContinent', $numContinent); // Utiliser l'ID du continent
         $nb=$req->execute();
         return $nb;
     }
@@ -149,7 +161,8 @@ class Nationalite
         $num=$nationalite->getNum();
         $req->bindParam(':id',$num);
         $req->bindParam(':libelle',$nationalite->getlibelle());
-        $req->bindParam(':numContinent',$nationalite->getNumContinent());
+        $numContinent = $nationalite->getNumContinent()->getNum();
+        $req->bindParam(':numContinent', $numContinent);
         $nb=$req->execute();
         return $nb;
     }

@@ -2,13 +2,72 @@
 <main role="main">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Hello, world!</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-    </div>
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><b>Bienvenue !</b></h1>
+    <p class="lead">Bienvenue sur le site d'administrations de BiblioWeb</p>
   </div>
+</div>
+
+
+<?php
+ 
+$dataPoints = array(
+	array("label"=> "Food + Drinks", "y"=> 590),
+	array("label"=> "Activities and Entertainments", "y"=> 261),
+	array("label"=> "Health and Fitness", "y"=> 158),
+	array("label"=> "Shopping & Misc", "y"=> 72),
+	array("label"=> "Transportation", "y"=> 191),
+	array("label"=> "Rent", "y"=> 573),
+	array("label"=> "Travel Insurance", "y"=> 126)
+);
+	
+?>
+
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	exportEnabled: true,
+	title:{
+		text: "Average Expense Per Day  in Thai Baht"
+	},
+	subtitles: [{
+		text: "Currency Used: Thai Baht (฿)"
+	}],
+	data: [{
+		type: "pie",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - #percent%",
+		yValueFormatString: "฿#,##0",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="container">
     <!-- Example row of columns -->

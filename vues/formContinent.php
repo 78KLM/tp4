@@ -9,18 +9,7 @@
             <input type='text' name='libelle' id='libelle' class='form-controle' placehoder='Saisir le libellé' value='<?php if($mode == "Modifier"){echo $continent->getlibelle();}?>'>
               
             <!-- marche pas !-->
-            <div class='form-group'>
-            <label for='continent'>Libellé</label>
-            <select name="continent" class='form-controle'> 
-              <?php 
-              foreach($lesContinents->getLesContinents() as $continent){
-                $selection=$continent->num == $LaNationalite->numContinent ? 'selected' : '';
-                echo "<option value='$continent->num' $selection >$continent->libelle</option>";
-              }
-              ?>
-              
-            </select>
-            </div>
+            
             <!-- marche pas !-->
         </div>
 

@@ -64,8 +64,14 @@
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-book"></i>Gestion des genres</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="index.php?uc=genre&action=list">Listes des genres</a>
-          <a class="dropdown-item" href="index.php?uc=genre&action=add
-          ">Ajouter un genre</a>
+          <a class="dropdown-item" href="index.php?uc=genre&action=add">Ajouter un genre</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"> Gestion des Livres</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="index.php?uc=livre&action=list">Listes des Livres</a>
+          <a class="dropdown-item" href="index.php?uc=livre&action=add">Ajouter un Livres</a>
         </div>
       </li>
       <li class="nav-item dropdown">

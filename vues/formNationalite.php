@@ -1,26 +1,29 @@
 
 
 
-<div class='container mt-5'>
-    <h2 class='pt-3 text-center'> <?php echo $mode?> une nationalite</h2>
-      <form action='index.php?uc=nationalite&action=valideForm <?php $mode ?>' method='post' class='col-6 offset-3 border border-secondary p-3 rounded'>
-        <div class='form-group'>
-            <label for='libelle'>Libellé</label>
-            <input type='text' name='libelle' id='libelle' class='form-controle' placehoder='Saisir le libellé' value='<?php if($mode == "Modifier"){echo $nationalite->getlibelle();}?>'>
+<div class="container mt-5">
+    <h2 class='pt-3 text-center'> <?php echo $mode ?> une nationalité</h2>
+    <form action="index.php?uc=nationalite&action=valideForm<?php $mode ?>" method="post" class="col-md-6 offset-md-3 border border-primary p-3 rounded">
+        <div class="form-group">
+            <label for="libelle">Libellé</label>
+            <input type="text" class="form-control" id="libelle" placeholder="Saisir le libellé" name="libelle" value="<?php if($mode == 'Modifier') {  echo $nationalite->getLibelle(); } ?>">
         </div>
 
-        <div class='form-group'>
-            <label for='continent'>Libellé du continent</label>
-            <select name="continent" class='form-controle'> 
-              <?php $LesContinents = [];
-              foreach($LesContinents as $continent){
-                $selection=$continent->getNum() == $LaNationalite->getNumContinent() ? 'selected' : '';
-                echo "<option value='".$continent->getNum()."' $selection >".$continent->getLibelle()."</option>";
+        <?php
+          $selectedContinentId = ($mode == "modifier" && $nationalite->getNumContinent()) ? $nationalite->getNumContinent()->getNum() : '';
+          ?>
+      <div class='form-group'>
+          <label for='continent'>Libellé du continent</label>
+          <select name="continent" class='form-control'>
+              <?php 
+              //$LesContinents=Continent::findAll();
+              foreach($LesContinents as $continent) {
+                  $selected = ($continent->getNum() == $selectedContinentId) ? 'selected' : '';
+                  echo "<option value='".$continent->getNum()."' $selected>".$continent->getLibelle()."</option>";
               }
               ?>
-              
-            </select>
-        </div>
+          </select> 
+      </div>
 
 
 

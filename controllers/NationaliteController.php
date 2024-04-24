@@ -1,22 +1,27 @@
 <?php 
 $action=$_GET['action'];
+
 switch($action){
     case 'list':
-            $LesNationalites=Nationalite::findAll();
-            $LesContinents=Continent::findAll();
-            if(!empty($_POST)){
-                $libelle = $_POST['libelle'];
-                $continentSel=$_POST['continent'];
-                if ($libelle != "") {$textReq.= " and nationalite.libelle like '%".$libelle."%'";}
-                if ($continentSel != "Tous") {$textReq.= " and continent.num = ". $continentSel;} }
+            $libelle='';
+            $continentSel="Tous";
+            if(!empty($_POST['libelle']) || !empty($_POST['continent'])){
+                $libelle= $_POST['libelle'];
+                $continentSel= $_POST['continent'];
+            }
+            $lesContinents=Continent::findALL($libelle, $continentSel);
+    
+            $lesNationalites = Nationalite::findALL();
             include ('vues/listeNationalite.php');
         break;
     case 'add':
         $mode="Ajouter";
+        $LesContinents=Continent::findAll();
         include ('vues/formNationalite.php');
         break;
     case 'update':
         $mode="Modifier";
+        $LesContinents=Continent::findAll();
         $nationalite=Nationalite::findById($_GET['num']);
         include ('vues/formNationalite.php');
         break;
@@ -38,13 +43,17 @@ switch($action){
         if(empty($_POST['num'])) //cas d'un ajout
         {
             $nationalite->setLibelle($_POST['libelle']);
-            $nb=Nationalite::add($nationalite);
+            $continent = Continent::findById($_POST['continent']);
+            $nationalite->setNumContinent($continent); 
+            $nb = Nationalite::add($nationalite);
             $message = "ajouté";
         }else { //cas modif
             $nationalite->setNum($_POST['num']);
             $nationalite->setLibelle($_POST['libelle']);
-            $nb=Nationalite::update($nationalite);
-            $message = "modifié";
+            $continent = Continent::findById($_POST['continent']);
+            $nationalite->setNumContinent($continent); 
+            $nb = Nationalite::update($nationalite);
+            $message = 'modifié';
         }
         if($nb==1){
             $_SESSION['message']=["success"=>"Le nationalite a bien été $message"];
