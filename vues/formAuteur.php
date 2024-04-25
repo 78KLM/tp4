@@ -22,6 +22,19 @@
             <!-- marche pas !-->
         </div>
 
+        <div class='form-group'>
+          <label for='nationalite'>Libellé des nationalité</label>
+          <select name="nationalite" class='form-control'>
+              <?php 
+              //$LesContinents=Continent::findAll();
+              foreach($LesNationalites as $nationalite) {
+                  $selected = ($nationalite->getNum() == $selectedNationaliteId) ? 'selected' : '';
+                  echo "<option value='".$nationalite->getNum()."' $selected>".$nationalite->getLibelle()."</option>";
+              }
+              ?>
+          </select> 
+      </div>
+
 
 
         <input type='hidden' id='num' name='num' value=<?php if($mode == "Modifier"){ echo $auteur->getNum();}?>>

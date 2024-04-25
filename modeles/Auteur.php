@@ -22,6 +22,8 @@ class Auteur
      */
     private $prenom;
 
+    private $nationalite;
+
 
     
 
@@ -88,18 +90,50 @@ class Auteur
     return $this;
     }
 
+        /**
+     * Get the number of the continent for this author.
+     *
+     * @return string|null The number of the continent, or null if not set.
+     */
+    public function getNationalite()
+    {
+        return $this->nationalite;
+    }
+
+    
+    /**
+     * Set the value of numContinent
+     */
+    public function setNationalite(Nationalite $nationalite) : self
+    {
+        $this->nationalite = $nationalite;
+        return $this;
+    }
+
 
     /**
-     * Retourne l'ensembe des continets
+     * retourne l'ensemble des auteurs
      *
-     * @return Auteur[] tableau d'objet auteur
+     * @return array
      */
-    public static function findAll() :array
-    {
-        $req=MonPdo::getInstance()->prepare("select * from auteur");
-        $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'auteur');
+    public static function findAll(?string $prenom = "", ?string $nom = "", ?string $nationaliteSel = "Tous"): array {
+        $texteReq = "SELECT a.num, a.nom, a.prenom, n.libelle AS nationalite FROM auteur a JOIN nationalite n ON a.numNationalite = n.num ";
+        if($prenom !== "") {
+            $texteReq .= " WHERE a.prenom LIKE '%" . $prenom . "%'";
+        }
+    
+        if($nom !== "") {
+            $texteReq .= ($prenom !== "") ? " AND a.nom LIKE '%" . $nom . "%'" : " WHERE a.nom LIKE '%" . $nom . "%'";
+        }
+    
+        if($nationaliteSel !== "Tous") {
+            $texteReq .= ($prenom !== "" || $nom !== "") ? " AND n.libelle = '" . $nationaliteSel . "'" : " WHERE n.libelle = '" . $nationaliteSel . "'";
+        }
+    
+        $req = MonPdo::getInstance()->prepare($texteReq);
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Auteur');
         $req->execute();
-        $lesResultats=$req->fetchALL();
+        $lesResultats = $req->fetchAll();
         return $lesResultats;
     }
 
@@ -122,20 +156,22 @@ class Auteur
 
 
     /**
-     * Permet d'ajouter un Auteur
+     * permet d'ajouter un auteur
      *
-     * @param Auteur $auteur contient à ajouter
-     * @return integer 1 si l'oppération a reussi 0 si elle a fail
+     * @param Auteur $auteur Auteur à ajouter
+     * @return integer Résultat (1 si l'opération a réussi et 0 sinon)
      */
-    public static function add(Auteur $auteur) :int 
+    public static function add(Auteur $auteur) : int
     {
-        $nom=$auteur->getNom();
-        $prenom=$auteur->getPrenom();
-        $req=MonPdo::getInstance()->prepare("insert into auteur(nom,prenom) values(:nom, :prenom)");
-        $req->bindParam(':nom',$nom);
-        $req->bindParam(':prenom',$prenom);
-        $nb=$req->execute();
-        return $nb;
+        $req = MonPdo::getInstance()->prepare("INSERT INTO auteur (nom, prenom, nationalite) VALUES (:nom, :prenom, :nationalite)");
+        $nom = $auteur->getNom();
+        $prenom = $auteur->getPrenom();
+        $numContinent = $auteur->getNationalite();
+        $req->bindParam(":nom", $nom);
+        $req->bindParam(":prenom", $prenom);
+        $req->bindParam(":nationalite", $nationalite);
+        $nb = $req->execute();
+        return $nb; 
     }
 
     /**

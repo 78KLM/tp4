@@ -2,7 +2,8 @@
 $action=$_GET['action'];
 switch($action){
     case 'list':
-            $LesAuteurs=Auteur::findAll();
+            $LesNationalites = Nationalite::findALL();
+            $lesAuteurs = Auteur::findAll();
             include ('vues/listeAuteur.php');
         break;
     case 'add':
@@ -33,12 +34,14 @@ switch($action){
         {
             $auteur->setNom($_POST['nom']);
             $auteur->setPrenom($_POST['prenom']);
+            $auteur->setNationalite($_POST['nationalite']);
             $nb=Auteur::add($auteur);
             $message = "ajouté";
         }else { //cas modif
             $auteur->setNum($_POST['num']);
             $auteur->setNom($_POST['nom']);
             $auteur->setPrenom($_POST['prenom']);
+            $auteur->setNationalite($_POST['nationalite']);
             $nb=Auteur::update($auteur);
             $message = "modifié";
         }
