@@ -2,8 +2,18 @@
 $action=$_GET['action'];
 switch($action){
     case 'list':
-            $LesNationalites = Nationalite::findALL();
-            $lesAuteurs = Auteur::findAll();
+            $nom='';
+            $prenom='';
+            $natSel="Tous";
+            $nom='';
+            if(!empty($_POST['nom']) || !empty($_POST['prenom'])|| !empty($_POST['nationalite'])){
+                $nom= $_POST['nom'];
+                $prenom= $_POST['prenom'];
+                $natSel= $_POST['nationalite'];
+            }
+            $lesAuteurs = Auteur::findAll($nom,$prenom);
+            $lesNationalites = Nationalite::findALL($libelle, $natSel);
+
             include ('vues/listeAuteur.php');
         break;
     case 'add':
